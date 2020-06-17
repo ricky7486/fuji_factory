@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="ColorLane1InspectButton">#FF007EF1</Color>
+    <Color x:Key="ColorLane1Background">#FF629ABB</Color>
+    <Color x:Key="ColorLane1Boundary">#FF9AC3DA</Color>
+    <Color x:Key="ColorLane1DialogBackground">#FFC2D5E0</Color>    
+    <Color x:Key="ColorLane1DialogBorderTop">#FF9cceff</Color>
+    <Color x:Key="ColorLane1DialogBorderBottom">#FFd1eaff</Color>
+    <Color x:Key="ColorLane1DialogBorderTopActivated">Orange</Color>
+    <Color x:Key="ColorLane1DialogBorderBottomActivated">LightYellow</Color>    
+
+    <Color x:Key="ColorLane2InspectButton">#FF617f00</Color>
+    <Color x:Key="ColorLane2Background">#FF629B5F</Color>
+    <Color x:Key="ColorLane2Boundary">#FF98c389</Color>
+    <Color x:Key="ColorLane2DialogBackground">#FFcce899</Color>
+    <Color x:Key="ColorLane2DialogBorderTop">#FFabdc4b</Color>
+    <Color x:Key="ColorLane2DialogBorderBottom">#CCe9ffb0</Color>
+    <Color x:Key="ColorLane2DialogBorderTopActivated">Orange</Color>
+    <Color x:Key="ColorLane2DialogBorderBottomActivated">LightYellow</Color>    
+    
+
+    <SolidColorBrush x:Key="InspectButtonBrushDualLane" Color="{DynamicResource ColorLane1InspectButton}" />
+    <SolidColorBrush x:Key="BackgroundBrushDualLane" Color="{DynamicResource ColorLane1Background}" />
+    <SolidColorBrush x:Key="BoundaryBrushDualLane" Color="{DynamicResource ColorLane1Boundary}" />
+    <SolidColorBrush x:Key="DialogBackgroundBrushDualLane" Color="{DynamicResource ColorLane1DialogBackground}" />
+    <SolidColorBrush x:Key="DialogBorderTopBrushDualLane" Color="{DynamicResource ColorLane1DialogBorderTop}" />
+    <SolidColorBrush x:Key="DialogBorderBottomBrushDualLane" Color="{DynamicResource ColorLane1DialogBorderBottom}" />
+    <SolidColorBrush x:Key="DialogBorderTopBrushDualLaneActivated" Color="{DynamicResource ColorLane1DialogBorderTopActivated}" />
+    <SolidColorBrush x:Key="DialogBorderBottomBrushDualLaneActivated" Color="{DynamicResource ColorLane1DialogBorderBottomActivated}" />
+  
+    
+</ResourceDictionary>

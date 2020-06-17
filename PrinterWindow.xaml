@@ -1,0 +1,211 @@
+﻿<Window x:Class="PrinterCenter.PrinterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PrinterCenter"
+        xmlns:customControl="clr-namespace:PrinterCenter.CustomControl"
+        xmlns:netDriveTool ="clr-namespace:PrinterCenter.UI"
+        xmlns:oneLaneSelector ="clr-namespace:PrinterCenter.UI.OneLaneSelector"
+        xmlns:commonSetting ="clr-namespace:PrinterCenter.UI.CommonSetting"
+        xmlns:sfSetting ="clr-namespace:PrinterCenter.UI.SharedFolderSetting"
+        xmlns:ucCustom ="clr-namespace:PrinterCenter.UI.Custom"
+        xmlns:ucChart ="clr-namespace:PrinterCenter.UI.Chart"
+        xmlns:ucFlow ="clr-namespace:PrinterCenter.UI.Flow"
+        xmlns:ucWipe="clr-namespace:PrinterCenter.UI.Wipe"
+        xmlns:ucDoctor="clr-namespace:PrinterCenter.UI.Doctor"
+        xmlns:ucFuji ="clr-namespace:PrinterCenter.UI.FujiEasyLink"
+       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        Style="{StaticResource DialogWindowStyle}"
+        Title="{DynamicResource @PRINTER_CENTER}" 
+        MinWidth="700" MinHeight="600"
+         DataContext="{Binding PrinterWindowVM, Source={StaticResource Locator}}"
+        SizeToContent="WidthAndHeight" Closing="Window_Closing" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <commonSetting:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
+    <Grid Width="800" Height="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" BorderBrush="#FF629ABB" BorderThickness="5" CornerRadius="10" Width="Auto">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <!--Setting-->
+                <RadioButton GroupName="ViewSelector" Width="50" Height="50" Margin="10"  BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}"  
+                             Visibility="{Binding SettingVisible, Converter={StaticResource BoolToVisibilityConverter}}" 
+                             IsChecked="{Binding SettingIsCheck}" >
+                    <Image Source="Images/Setting.png" ></Image>
+                </RadioButton>
+                <TextBlock Text="{DynamicResource @SETTING}" HorizontalAlignment="Center" TextWrapping="Wrap" Visibility="{Binding SettingVisible, Converter={StaticResource BoolToVisibilityConverter}}" ></TextBlock>
+                <!--Open-->
+                <RadioButton  Width="50" Height="50" Margin="10"  BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}"  
+                             
+                             IsChecked="{Binding OpenIsCheck}" Command="{Binding OpenFileCommand}">
+                    <Image Source="Images/open-file-icon.png"/>
+                </RadioButton>
+                <!--Save-->
+                <RadioButton  Width="50" Height="50" Margin="10"  BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}"  
+                             
+                             IsChecked="{Binding SaveIsCheck}" Command="{Binding SaveFileCommand}">
+                    <Image Source="Images/Save-icon.png"/>
+                </RadioButton>
+                <!--Chart-->
+                <RadioButton GroupName="ViewSelector" Width="50" Height="50" Margin="10" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}"  
+                             Visibility="{Binding ChartVisible, Converter={StaticResource BoolToVisibilityConverter}}" 
+                             IsChecked="{Binding ChartIsCheck}" >
+                    <Image Source="Images/chart.png" ></Image>
+                </RadioButton>
+                <TextBlock Text="{DynamicResource @CHART}" HorizontalAlignment="Center" TextWrapping="Wrap" Visibility="{Binding ChartVisible, Converter={StaticResource BoolToVisibilityConverter}}" ></TextBlock>
+                <!--Flow-->
+                <RadioButton GroupName="ViewSelector" Width="50" Height="50" Margin="10" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}" 
+                             Visibility="{Binding FlowVisible, Converter={StaticResource BoolToVisibilityConverter}}" 
+                             IsChecked="{Binding FlowIsCheck}" >
+                    <Image Source="Images/Flow.png" ></Image>
+                </RadioButton>
+                <TextBlock Text="{DynamicResource @FLOW}" HorizontalAlignment="Center" TextWrapping="Wrap" Visibility="{Binding FlowVisible, Converter={StaticResource BoolToVisibilityConverter}}" ></TextBlock>
+                <!--Wipe-->
+                <RadioButton GroupName="ViewSelector" Width="50" Height="50" Margin="10" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}" 
+                             Visibility="{Binding WipeVisible, Converter={StaticResource BoolToVisibilityConverter}}" 
+                             IsChecked="{Binding WipeIsCheck}"   >
+                    <Image Source="Images/Wipe.png" ></Image>
+                </RadioButton>
+                <TextBlock Text="{DynamicResource @WIPE}" HorizontalAlignment="Center" TextWrapping="Wrap" Visibility="{Binding WipeVisible, Converter={StaticResource BoolToVisibilityConverter}}" ></TextBlock>
+                <!--Doctor-->
+                <RadioButton GroupName="ViewSelector" Width="50" Height="50" Margin="10" BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ToggleButtonStyleKey}}"  
+                             Visibility="{Binding DoctorVisible, Converter={StaticResource BoolToVisibilityConverter}}" 
+                             IsChecked="{Binding DoctorIsCheck}"   >
+                    <Image Source="Images/Doctor.png" Width="35" Height="35"></Image>
+                </RadioButton>
+                <TextBlock Text="{DynamicResource @DOCTOR}" HorizontalAlignment="Center" TextWrapping="Wrap" Visibility="{Binding DoctorVisible, Converter={StaticResource BoolToVisibilityConverter}}" ></TextBlock>
+            </StackPanel>
+        </Border>
+        <!--Setting頁面-->
+        <Grid  Grid.Column="1"  Margin="20"  
+               Visibility="{Binding SettingIsCheck, Converter={StaticResource BoolToVisibilityConverter}}" >
+            <customControl:StepTabControl TabTextColor="Black" SelectedTabTextColor="Red" SelectedTabBackground="#FFE0C581" 
+                                      TabMargin="10"  TabHeight="60" TabWidth="100" Background="Transparent"
+                                          BorderThickness="0" 
+                                          SelectedIndex="{Binding stcSelectedIndex}" >
+          
+                <TabItem Header="{DynamicResource @TOOL}">
+                    <netDriveTool:ucNetworkDrive x:Name="ucNetworkDrive"></netDriveTool:ucNetworkDrive>
+                </TabItem>
+
+                <TabItem Header="{DynamicResource @GENERAL_SETTING}" Margin="0,0,0,0">
+                    <oneLaneSelector:ucLaneSelectorHost ></oneLaneSelector:ucLaneSelectorHost>
+
+
+                </TabItem  >
+
+                <TabItem x:Name="tabLane1" Header="{DynamicResource @LANE1}" Margin="0,0,0,0" Visibility="Collapsed" >
+
+                    <StackPanel>
+                        <commonSetting:ucCommonSetting  x:Name="ucLane1_Common" Height="Auto"></commonSetting:ucCommonSetting>
+                        <sfSetting:ucSharedFolderSetting x:Name="ucLane1_SF"></sfSetting:ucSharedFolderSetting>
+                    </StackPanel>
+
+                </TabItem>
+
+                <TabItem x:Name="tabLane2" Header="{DynamicResource @LANE2}" Margin="0,0,0,0" Visibility="Collapsed" >
+
+                    <StackPanel>
+                        <commonSetting:ucCommonSetting  x:Name="ucLane2_Common" Height="Auto"></commonSetting:ucCommonSetting>
+                        <sfSetting:ucSharedFolderSetting x:Name="ucLane2_SF"></sfSetting:ucSharedFolderSetting>
+                    </StackPanel>
+                </TabItem>
+
+                <!--Custom -->
+                <TabItem Header="{DynamicResource @CUSTOMIZATION}" Visibility="{Binding isCustomizationVisible, Converter={StaticResource BoolToVisibilityConverter}}" >
+                    <ucCustom:ucCustom x:Name="ucCustom"></ucCustom:ucCustom>
+                </TabItem>
+                
+                <!--Fuji-->
+                <TabItem Header="FujiEasyLink" Visibility="{Binding isFujiEasyLinkVisible, Converter={StaticResource BoolToVisibilityConverter}}" >
+                    <ucFuji:ucFujiEasyLink x:Name="ucFujiEasyLink"></ucFuji:ucFujiEasyLink>
+                </TabItem>
+                <!--<TabItem Header="Final" Selector.Selected="FinalTabItem_Selected">-->
+                <TabItem Header="Final" >
+                    <!--<TabItem.InputBindings>
+                        <MouseBinding Command="{Binding FinalTabItemSelectedCommand}" MouseAction="LeftClick" />
+                    </TabItem.InputBindings>-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.35*"/>
+                            <RowDefinition Height="0.35*"/>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.1*"/>
+
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.8*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <ListBox x:Name="lbStatusReporter" Width="500" Height="160" Grid.Row="0" Grid.ColumnSpan="2"/>
+                        <ListBox x:Name="lbDebugMsg" Width="500" Height="160" Grid.Row="1" Grid.ColumnSpan="2"/>
+
+
+                        <!--<Button Grid.Row="2" Grid.Column="1"
+                                Width="150" Height="40"  HorizontalAlignment="Right" Margin="5"
+                                Content="{DynamicResource @OPEN_SERVICE}" Command="{Binding OpenServiceCommand}" Visibility="{Binding BtnOpenServiceVisible, Converter={StaticResource BoolToVisibilityConverter}}"></Button>-->
+
+
+                        <ToggleButton  x:Name="btnOpenService" Grid.Row="2" Grid.Column="1" Width="150" Height="40"  HorizontalAlignment="Right" Margin="5"
+                            Content="{Binding ServiceBtnContent}"  >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding OpenServiceCommand}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{Binding CloseServiceCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ToggleButton>
+                        
+                        <StatusBar Grid.Row="3" Grid.ColumnSpan="2"  Background="Transparent" >
+                            <StatusBarItem>
+                                <StackPanel Orientation="Horizontal"  VerticalAlignment="Center">
+                                    <TextBlock Text="{DynamicResource ResourceKey=@SERIAL_NUMBER}"/>
+                                    <TextBox x:Name="tbSerialNumber" Text="{Binding SN}" Margin="10,0,0,0" Width="100" IsEnabled="{Binding SNEnable}"></TextBox>
+                                    <Button   BorderThickness="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Width="30" 
+                              Margin="10,0,0,0" Command="{Binding SNEditCommand}">
+                                        <Image Source="/Images/EditModel.png"/>
+                                    </Button>
+                                </StackPanel>
+
+                            </StatusBarItem>
+                        </StatusBar>
+                    </Grid>
+                </TabItem>
+            </customControl:StepTabControl>
+        </Grid>
+        <!--Chart頁面-->
+        <Grid Grid.Column="1"   
+              Visibility="{Binding ChartIsCheck, Converter={StaticResource BoolToVisibilityConverter}}" 
+              Margin="20">
+            <ucChart:ucChartHost x:Name="ucChartHost" Height="800"></ucChart:ucChartHost>
+        </Grid>
+        <!--Flow頁面-->
+        <Grid Grid.Column="1" 
+              Visibility="{Binding FlowIsCheck, Converter={StaticResource BoolToVisibilityConverter}}"
+              Margin="20">
+            <ucFlow:ucFlowHost x:Name="ucFlowHost"></ucFlow:ucFlowHost>
+        </Grid>
+        <!--Wipe頁面-->
+        <Grid Grid.Column="1" 
+              Visibility="{Binding WipeIsCheck, Converter={StaticResource BoolToVisibilityConverter}}"
+              Margin="20">
+            <ucWipe:ucWipe x:Name="ucWipe"></ucWipe:ucWipe>
+        </Grid>
+        <!--Doctor頁面-->
+        <Grid Grid.Column="1" 
+              Visibility="{Binding DoctorIsCheck, Converter={StaticResource BoolToVisibilityConverter}}"
+              Margin="20">
+            <ucDoctor:ucDoctor x:Name="ucDoctor"></ucDoctor:ucDoctor>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC2D5CD2-3E1E-452C-A9CC-52329719E30B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PrinterCenter</RootNamespace>
+    <AssemblyName>PrinterCenter</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Bin\ClosedLoop\Printer\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\ClosedLoop\Printer\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>PrinterCenter0403.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Bin\ClosedLoop\Printer\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\Bin\ClosedLoop\Printer\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SAGDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\SAGDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SAGDebug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Bin\ClosedLoop\Printer\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SAGRelease|AnyCPU'">
+    <OutputPath>bin\SAGRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SAGRelease|x64'">
+    <OutputPath>..\Bin\ClosedLoop\Printer\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37223, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.2.0.37224, Culture=neutral, PublicKeyToken=f46ff315b1088208, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net40\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibraries\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Controls.DataVisualization.Toolkit.4.0.0.0\lib\net40-Client\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="CustomControl\ScrollableCategoryAxis.cs" />
+    <Compile Include="CustomControl\ScrollableLineSeries.cs" />
+    <Compile Include="File\DirectoryWatcher.cs" />
+    <Compile Include="File\FileProcess.cs" />
+    <Compile Include="File\IniFile.cs" />
+    <Compile Include="File\TextReadWrite.cs" />
+    <Compile Include="File\XMLExtensions.cs" />
+    <Compile Include="LicenceClass.cs" />
+    <Compile Include="Localization\MultiLanguageHelper.cs" />
+    <Compile Include="CustomControl\StepTabControl.cs" />
+    <Compile Include="Log\Log4.cs" />
+    <Compile Include="NetTool.cs" />
+    <Compile Include="NetworkDrive.cs" />
+    <Compile Include="PrinterEntity.cs" />
+    <Compile Include="PrinterManager.cs" />
+    <Compile Include="PrinterWindowVM.cs" />
+    <Compile Include="Printer\Algorithm\CenterOffsetCorrectionAlgorithm.cs" />
+    <Compile Include="Printer\Algorithm\DefectStatistic.cs" />
+    <Compile Include="Printer\Algorithm\EkraFiducailOffset.cs" />
+    <Compile Include="Printer\Algorithm\ICorrectionAlgorithm.cs" />
+    <Compile Include="Printer\Algorithm\HanwhaHAVAvg.cs" />
+    <Compile Include="Printer\Algorithm\RotationCorrectionAlgorithm.cs" />
+    <Compile Include="Printer\Algorithm\StretchAlgorithm.cs" />
+    <Compile Include="Printer\Algorithm\PadHAVAvg.cs" />
+    <Compile Include="Printer\DataStructure\EventQueue.cs" />
+    <Compile Include="Printer\DekPrinter.cs" />
+    <Compile Include="Printer\DesenPrinter.cs" />
+    <Compile Include="Printer\EkraPrinter.cs" />
+    <Compile Include="Printer\EsePrinter.cs" />
+    <Compile Include="Printer\FujiPrinter.cs" />
+    <Compile Include="Printer\GKGPrinter.cs" />
+    <Compile Include="Printer\HanwhaPrinter.cs" />
+    <Compile Include="Printer\HtgdPrinter.cs" />
+    <Compile Include="Printer\INOTISPrinter.cs" />
+    <Compile Include="Printer\DataStructure\MutexQueueList.cs" />
+    <Compile Include="Printer\DataStructure\MutexQueue.cs" />
+    <Compile Include="Printer\IParser.cs" />
+    <Compile Include="Printer\JudgeWipe\IJudgeWipeAlgorithm.cs" />
+    <Compile Include="Printer\JudgeWipe\JudgeWipeAvgVol.cs" />
+    <Compile Include="Printer\JudgeWipe\JudgeWipeBridgeDefect.cs" />
+    <Compile Include="Printer\JudgeWipe\JudgeWipeCntFailSameComp.cs" />
+    <Compile Include="Printer\JudgeWipe\JudgeWipeCntFailSamePad.cs" />
+    <Compile Include="Printer\JudgeWipe\JudgeWipePeakofSinglePad.cs" />
+    <Compile Include="Printer\MinamiPrinter.cs" />
+    <Compile Include="Printer\MPMPrinter.cs" />
+    <Compile Include="Printer\PrinterBase.cs" />
+    <Compile Include="Printer\YamahaPrinter.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="Service\IPrinterDuplexService.cs" />
+    <Compile Include="Service\PrinterServiceHost.cs" />
+    <Compile Include="Service\PrinterDuplexService.cs" />
+    <Compile Include="Service\Singleton.cs" />
+    <Compile Include="SharedFolderWatcher.cs" />
+    <Compile Include="UI\AutoWaitingCursor.cs" />
+    <Compile Include="UI\Chart\ChartHostVM.cs" />
+    <Compile Include="UI\Chart\ucChartHost.xaml.cs">
+      <DependentUpon>ucChartHost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CommonSetting\BoolToVisibilityConverter.cs" />
+    <Compile Include="UI\CommonSetting\CommonSettingVM.cs" />
+    <Compile Include="UI\CommonSetting\ucCommonSetting.xaml.cs">
+      <DependentUpon>ucCommonSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Custom\CustomVM.cs" />
+    <Compile Include="UI\Custom\ucCustom.xaml.cs">
+      <DependentUpon>ucCustom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DialogWindowStyleBehaviorImpl.cs" />
+    <Compile Include="UI\Doctor\DoctorVM.cs" />
+    <Compile Include="UI\Doctor\ucDoctor.xaml.cs">
+      <DependentUpon>ucDoctor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Flow\CheckedBoxListViewModel.cs" />
+    <Compile Include="UI\Flow\FlowHostVM.cs" />
+    <Compile Include="UI\Flow\ucFlowHost.xaml.cs">
+      <DependentUpon>ucFlowHost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FujiEasyLink\FujiEasyLinkVM.cs" />
+    <Compile Include="UI\FujiEasyLink\ucFujiEasyLink.xaml.cs">
+      <DependentUpon>ucFujiEasyLink.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MessageBox\Agent.cs" />
+    <Compile Include="UI\MessageBox\DelegateCommand.cs" />
+    <Compile Include="UI\MessageBox\MessageBoxViewModel.cs" />
+    <Compile Include="UI\MessageBox\TRMessageBox.cs" />
+    <Compile Include="UI\MessageBox\TRMessageBoxWindow.xaml.cs">
+      <DependentUpon>TRMessageBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NetworkDrive\NetDriveModel.cs" />
+    <Compile Include="UI\NetworkDrive\NetworkDriveViewModel.cs" />
+    <Compile Include="UI\NetworkDrive\ucNetworkDrive.xaml.cs">
+      <DependentUpon>ucNetworkDrive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OneLaneSelector\LaneSelectorHostVM.cs" />
+    <Compile Include="UI\OneLaneSelector\OneLaneSelectorVM.cs" />
+    <Compile Include="UI\OneLaneSelector\ucLaneSelectorHost.xaml.cs">
+      <DependentUpon>ucLaneSelectorHost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OneLaneSelector\ucOneLaneSelector.xaml.cs">
+      <DependentUpon>ucOneLaneSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SharedFolderSetting\SharedFolderSettingVM.cs" />
+    <Compile Include="UI\SharedFolderSetting\ucSharedFolderSetting.xaml.cs">
+      <DependentUpon>ucSharedFolderSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ucPriChart.xaml.cs">
+      <DependentUpon>ucPriChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Wipe\ucWipe.xaml.cs">
+      <DependentUpon>ucWipe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Wipe\WipeVM.cs" />
+    <Compile Include="ViewModelLocator.cs" />
+    <Page Include="Localization\LanguageDictionary-China.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Localization\LanguageDictionary-English.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Localization\LanguageDictionary-German.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Localization\LanguageDictionary-Japan.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Localization\LanguageDictionary-Korea.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Localization\LanguageDictionary-Taiwan.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PrinterWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PrinterWindow.xaml.cs">
+      <DependentUpon>PrinterWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Chart\ucChartHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\CommonSetting\ucCommonSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Custom\ucCustom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Doctor\ucDoctor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\DualLaneStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Flow\CheckedListBoxDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Flow\ucFlowHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\FujiEasyLink\ucFujiEasyLink.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MessageBox\TRMessageBoxWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\NetworkDrive\ucNetworkDrive.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\OneLaneSelector\ucLaneSelectorHost.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\OneLaneSelector\ucOneLaneSelector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\SharedFolderSetting\ucSharedFolderSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ucPriChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Wipe\ucWipe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Resource Include="Images\EditModel.png" />
+    <Resource Include="Images\folder-search-icon.png" />
+    <Resource Include="Images\open-file-icon.png" />
+    <Resource Include="Images\Save-icon.png" />
+    <Content Include="ReleasedNote_PrinterCenter.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
+    <Resource Include="UI\CommonSetting\images\CenterV.png" />
+    <Resource Include="UI\CommonSetting\images\ArrowX.png" />
+    <Resource Include="Images\Wipe.png" />
+    <Resource Include="Images\Status-dialog-warning-icon.png" />
+    <Resource Include="Images\Doctor.png" />
+    <Content Include="PrinterCenter.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\MessageBox\Images\ErrorIcon.png" />
+    <Resource Include="UI\MessageBox\Images\InformationIcon.png" />
+    <Resource Include="UI\MessageBox\Images\QuestionIcon.png" />
+    <Resource Include="UI\MessageBox\Images\WarningIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IPCData\IPCData.csproj">
+      <Project>{3ED82F41-1DC8-4875-B2C0-F0670770AC8F}</Project>
+      <Name>IPCData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XStyle\XStyle.csproj">
+      <Project>{8dd0e799-859a-4111-999c-d4fab720abca}</Project>
+      <Name>XStyle</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PrinterCenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PrinterCenter.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\OneLaneSelector\Images\add.png" />
+    <Resource Include="UI\OneLaneSelector\Images\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\CommonSetting\images\Board.png" />
+    <Resource Include="UI\CommonSetting\images\Stencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PrinterCenter2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PrinterCenter0403.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UI\CommonSetting\images\PCBsmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\chart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Flow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\eye.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

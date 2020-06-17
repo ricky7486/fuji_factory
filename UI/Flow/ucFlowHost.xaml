@@ -1,0 +1,84 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PrinterCenter.UI.Flow"
+             xmlns:CommonSetting="clr-namespace:PrinterCenter.UI.CommonSetting" x:Class="PrinterCenter.UI.Flow.ucFlowHost"
+             mc:Ignorable="d" 
+             Width="Auto" Height="Auto"
+             DataContext="{Binding FlowHostVM, Source={StaticResource Locator}}"
+               >
+    <UserControl.Resources>
+        <CommonSetting:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <!--<ResourceDictionary Source="CheckedListBoxDictionary.xaml"/>-->
+    </UserControl.Resources>
+    
+    
+    <!--<UserControl.DataContext>
+        <local:FlowHostVM/>
+    </UserControl.DataContext>-->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" Visibility="{Binding IsLane1WFExist, Converter={StaticResource BoolToVisibilityConverter}}" >
+            <!--<Image Source="/PrinterCenter;component/Images/eye.png"  Width="50" Height="50"></Image>-->
+            <TextBlock Text="{Binding Lane1WFDisk}"  TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding Lane1WFPath}"  TextWrapping="Wrap"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Vertical" Visibility="{Binding IsLane2WFExist, Converter={StaticResource BoolToVisibilityConverter}}" >
+            <!--<Image Source="/PrinterCenter;component/Images/eye.png"  Width="50" Height="50"></Image>-->
+            <TextBlock Text="{Binding Lane2WFDisk}"  TextWrapping="Wrap"/>
+            <TextBlock Text="{Binding Lane2WFPath}" TextWrapping="Wrap"/>
+        </StackPanel>
+        <ListBox x:Name="lbLane1WF" Grid.Row="1" Grid.Column="0" Visibility="{Binding IsLane1WFExist, Converter={StaticResource BoolToVisibilityConverter}}" Margin="10"
+                 ItemsSource="{Binding Lane1WFList}" Height="300" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Name="check" IsChecked="{Binding IsChecked, Mode=TwoWay}" Margin="3" VerticalAlignment="Center" 
+                                  IsEnabled="False"/>
+                        <ContentPresenter Content="{Binding Value}" Margin="1"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox x:Name="lbLane2WF" Grid.Row="1" Grid.Column="2" Visibility="{Binding IsLane2WFExist, Converter={StaticResource BoolToVisibilityConverter}}" Margin="10"
+                 ItemsSource="{Binding Lane2WFList}" Height="300">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Name="check" IsChecked="{Binding IsChecked, Mode=TwoWay}" Margin="3" VerticalAlignment="Center"
+                                  IsEnabled="False"/>
+                        <ContentPresenter Content="{Binding Value}" Margin="1"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        <!--中間做顯示SPI檢測資料 MatchedData-->
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource @SPI_INSPECTED_DATA}"></TextBlock>
+        <ListBox x:Name="lbSPIData" Grid.Row="1" Grid.Column="1"  Margin="10"
+                 ItemsSource="{Binding spiInspectedData}" Height="300">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Name="check" IsChecked="{Binding IsChecked, Mode=TwoWay}" Margin="3" VerticalAlignment="Center"
+                                  IsEnabled="False"/>
+                        <ContentPresenter Content="{Binding Value}" Margin="1"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</UserControl>

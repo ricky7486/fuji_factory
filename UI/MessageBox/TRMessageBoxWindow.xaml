@@ -1,0 +1,55 @@
+﻿<Window x:Class="PrinterCenter.UI.TRMessageBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+        ResizeMode="NoResize" 
+		ShowInTaskbar="False" WindowStartupLocation="CenterScreen"
+		Style="{StaticResource DialogWindowStyle}"	
+        Title="{Binding Title}" Height="300" Width="680">
+
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+            <RowDefinition Height="60" />
+		</Grid.RowDefinitions>
+		<StackPanel Margin="5 10 5 5" Grid.Row="0" VerticalAlignment="Top">
+			<Border BorderBrush="White" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="{Binding MessageImageSource}" Visibility="{Binding ImageVisibility}" Width="70" Height="56"  x:Name="myImage" />
+			</Border>
+			<!--
+            <Border Width="{Binding ElementName=myImage,Path=Width}" Height="{Binding ElementName=myImage,Path=Height}" Opacity="0.25">
+                <Border.Background>
+                    <VisualBrush Visual="{Binding ElementName=myImage}">
+                        <VisualBrush.Transform>
+                            <ScaleTransform ScaleX="1" ScaleY="-1" CenterX="50" CenterY="40"></ScaleTransform>
+                        </VisualBrush.Transform>
+                    </VisualBrush>
+                </Border.Background>
+                <Border.OpacityMask>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="Black"></GradientStop>
+                        <GradientStop Offset="0.4" Color="Transparent"></GradientStop>
+                    </LinearGradientBrush>
+                </Border.OpacityMask>
+            </Border>
+			-->
+		</StackPanel>
+		
+		<ScrollViewer Grid.Row="1" Margin="3" VerticalScrollBarVisibility="Auto">
+				<TextBlock Text="{Binding Message}" Margin="0 0 3 0"  TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" />
+		</ScrollViewer>
+	
+
+		<Border Grid.Row="2"  BorderThickness="0" BorderBrush="#FFDFDFDF" > 
+			<DockPanel LastChildFill="False" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 0 5 0" Width="520">
+				<Button DockPanel.Dock="Right" Content="{DynamicResource @YES}" Visibility="{Binding YesNoVisibility}" Command="{Binding YesCommand}" IsDefault="{Binding IsYesDefault}" Margin="20 5 5 5" Height="40" Width="100" />
+				<Button DockPanel.Dock="Right" Content="{DynamicResource @OK}" Visibility="{Binding OkVisibility}" Command="{Binding OkCommand}" IsDefault="{Binding IsOkDefault}" Margin="20 5 5 5" Height="40" Width="100" />
+				<Button DockPanel.Dock="Left" Content="{DynamicResource @NO}" Visibility="{Binding YesNoVisibility}" Command="{Binding NoCommand}" IsDefault="{Binding IsNoDefault}" Margin="20 5 5 5" Height="40" Width="100" />
+				<Button DockPanel.Dock="Left" Content="{DynamicResource @CANCEL}" Visibility="{Binding CancelVisibility}" Command="{Binding CancelCommand}" IsDefault="{Binding IsCancelDefault}" Margin="20 5 5 5" Height="40" Width="100" />
+			</DockPanel>
+		</Border>
+	</Grid>
+</Window>
+

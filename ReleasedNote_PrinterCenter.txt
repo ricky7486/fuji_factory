@@ -1,0 +1,34 @@
+					PrinterCenter.exe Release Note
+====================================================================================================
+v.0.6.0.0	rex_miao@tri.com.tw		2019/10/1
+		1. Add Open/Save function 
+		2. Add Autoload Setting function
+v.0.5.2.1	rex_miao@tri.com.tw		2019/9/17
+		1. MPM fix Working path issue
+v.0.5.2.0	rex_miao@tri.com.tw		2019/9/16
+		1. Add MPM log
+v.0.5.1.0	ricky_chou@tri.com.tw		2019/8/28
+		1. Add Printer Window Close Function 
+v.0.5.0.0	ricky_chou@tri.com.tw		2019/8/21
+		1. Add Fuji Service and Base 
+v.0.4.0.1	rex_miao@tri.com.tw		2019/7/26
+		1. Fix Dek file format
+v.0.4.0.0	rex_miao@tri.com.tw		2019/7/23
+		* Add Printer CallBack contract for Fuji
+		1. Fix Barcode Parsing Exception bug
+v.0.3.1.0	rex_miao@tri.com.tw		2019/7/3
+		1. Fuji Setting UI 
+v.0.3.0.0	ricky_chou@tri.com.tw		2019/7/2
+		1. Add Fuji
+v.0.2.1.0	rex_miao@tri.com.tw		2019/6/27
+		1. Add SN Editable function
+v.0.2.0.0	rex_miao@tri.com.tw		2019/3/11
+		1. File Wathcer Rename support!
+v.0.1.0.2	rex_miao@tri.com.tw		2019/3/8
+		1. Add Flow CustomException and break the flow.
+		2. Add DirectoryWatcher Renamed event watching.
+v.0.1.0.1	rex_miao@tri.com.tw		2019/2/22
+		1. Fix wrong log and add more logs. 
+v.0.1.0.0	rex_miao@tri.com.tw		2019/2/22
+		* Add Custom Entry of ini file control, Add CustomOutput of GKG 
+

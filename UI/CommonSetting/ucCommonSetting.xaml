@@ -1,0 +1,295 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PrinterCenter.UI.CommonSetting"
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+             x:Class="PrinterCenter.UI.CommonSetting.ucCommonSetting"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+            
+             mc:Ignorable="d" 
+             Width="Auto"
+             Height="Auto">
+    <UserControl.DataContext>
+        <local:CommonSettingVM/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="dataMatchingBasisEnum"
+                MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:eMatchingBasis" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <Storyboard x:Key="OnMouseEnter_Board">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="imgBoard">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-74.013"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.975"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="75.833"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="-0.05"/>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+        <Storyboard x:Key="OnMouseEnter_Stencil">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="imgStencil">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="-74.704"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="75.371"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+
+        <EventTrigger RoutedEvent="ToggleButton.Click" SourceName="rbMoveStencil">
+            <BeginStoryboard x:Name="OnMouseEnter_Stencil_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter_Stencil}"/>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="ToggleButton.Click" SourceName="rbMoveBoard">
+            <BeginStoryboard x:Name="OnMouseEnter_Board_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter_Board}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <!--<RowDefinition Height="1*"/>-->
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <TextBlock Text="{DynamicResource @MATCHING_BASIS}"  ></TextBlock>
+            <ComboBox Height="23" Width="200" SelectedValue="{Binding MatchingBasis, Mode=TwoWay}" 
+                      ItemsSource="{Binding Source={StaticResource dataMatchingBasisEnum}}" Margin="10,0,0,0"/>
+        </StackPanel>
+        <Expander Grid.Row="1"  Header="{DynamicResource @PRINTER_ADJUST_METHOD}" Height="Auto" Background="Transparent">
+            <StackPanel d:LayoutOverrides="Height" Orientation="Vertical" Background="Transparent">
+                <RadioButton x:Name="rbMoveStencil" Width="Auto" Height="Auto" 
+    				IsChecked="{Binding IsMoveStencil}">
+                    <!--IsChecked="{Binding DataContext.IsMoveStencil ,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type onelanesetting:ucOneLaneSetting}}}"-->
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="8*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{DynamicResource @MOVE_STENCIL}" Grid.Row="0" Grid.ColumnSpan="3"/>
+                        <Image x:Name="imgStencil" Width="150" Source="images/Stencil.png" RenderTransformOrigin="1,1" Height="50" 
+    						Grid.Column="1" Grid.Row="1">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Grid>
+                </RadioButton>
+                <RadioButton x:Name="rbMoveBoard" Width="Auto" Height="Auto" 
+    				IsChecked="{Binding IsMovePCB}">
+                    <!--IsChecked="{Binding DataContext.IsMovePCB ,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type onelanesetting:ucOneLaneSetting}}}">-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="8*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{DynamicResource @MOVE_PCB}" Grid.Row="0" Grid.ColumnSpan="3"/>
+
+                        <Image x:Name="imgBoard" Width="150" Source="images/Board.png" RenderTransformOrigin="1,1" Height="50" 
+    						Grid.Column="1" Grid.Row="1">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Grid>
+                </RadioButton>
+            </StackPanel>
+        </Expander>
+
+        <Expander Grid.Row="2"  Header="{DynamicResource @ROTATE_DIRECTION}" Height="Auto" Background="Transparent">
+            <StackPanel Orientation="Horizontal" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <RadioButton Margin="20"  
+    				IsChecked="{Binding IsCWRotate}">
+                    <!--IsChecked="{Binding DataContext.IsCWRotate ,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type onelanesetting:ucOneLaneSetting}}}">-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="8*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="{DynamicResource @CLOCKWISE}"/>
+                        <Canvas Height="80" Width="80" Grid.Row="1" HorizontalAlignment="Left">
+                            <Line  StrokeThickness="5" Y1="80" Stroke="Black" />
+                            <Line  StrokeThickness="5" X1="0" Y1="80" X2="80" Y2="80"  Stroke="Black" />
+                            <ed:LineArrow Height="80" Stroke="Red" StrokeThickness="5" Width="80"/>
+                            <TextBlock Text="θ" Margin="10,50,0,0" Foreground="Red"/>
+                        </Canvas>
+                    </Grid>
+
+                </RadioButton>
+
+                <RadioButton  Margin="20" 
+    				IsChecked="{Binding IsCCWRotate}">
+                    <!--IsChecked="{Binding DataContext.IsCCWRotate ,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type onelanesetting:ucOneLaneSetting}}}">-->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="8*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="{DynamicResource @COUNTER_CLOCKWISE}"/>
+                        <Canvas Height="80" Width="80" Grid.Row="1" HorizontalAlignment="Left">
+                            <Line  StrokeThickness="5" Y1="80" Stroke="Black" />
+                            <Line  StrokeThickness="5" X1="0" Y1="80" X2="80" Y2="80"  Stroke="Black" />
+                            <ed:LineArrow Height="80" Stroke="Red" StrokeThickness="5" Width="80" RenderTransformOrigin="0.5,0.5" StartCorner="BottomLeft" >
+                                <ed:LineArrow.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ed:LineArrow.RenderTransform>
+                            </ed:LineArrow>
+                            <TextBlock Text="θ" Margin="10,50,0,0" Foreground="Red"/>
+                        </Canvas>
+                    </Grid>
+                </RadioButton>
+
+            </StackPanel>
+        </Expander>
+
+        <Expander Grid.Row="3" Header="{DynamicResource @QUADRENT}" Height="Auto" Width="Auto" Background="Transparent">
+            <Grid Height="200" Width="200" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="1*"/>
+                    <RowDefinition  Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton x:Name="rbQ2"  Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="II"
+    				IsChecked="{Binding IsQuadrent2}"/>
+                <!--IsChecked="{Binding DataContext.IsQuadrent2 ,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type onelanesetting:ucOneLaneSetting}}}"/>-->
+                <RadioButton x:Name="rbQ1"  Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="I"
+    				IsChecked="{Binding IsQuadrent1}"/>
+                <!--IsChecked="{Binding DataContext.IsQuadrent1 ,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type onelanesetting:ucOneLaneSetting}}}"/>-->
+
+                <RadioButton x:Name="rbQ3"  Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Content="III"
+    				IsChecked="{Binding IsQuadrent3}"/>
+                <!--IsChecked="{Binding DataContext.IsQuadrent4 ,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type onelanesetting:ucOneLaneSetting}}}"/>-->
+
+                <RadioButton x:Name="rbQ4"  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="IV"
+    				IsChecked="{Binding IsQuadrent4}"/>
+                <!--IsChecked="{Binding DataContext.IsQuadrent3 ,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type onelanesetting:ucOneLaneSetting}}}"/>-->
+
+                <Canvas Height="200" Width="200" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2">
+                    <ed:BlockArrow Canvas.Top="95" Width="200" Height="10"  Canvas.Left="0"  Orientation="Right" Stroke="Black"  StrokeThickness="5" />
+                    <ed:BlockArrow Canvas.Top="0"  Width="10"  Height="200" Canvas.Left="95" Orientation="Up"    Stroke="Black"  StrokeThickness="5" />
+                    <!--<TextBlock Text="X" FontWeight="Bold"></TextBlock>
+                    <TextBlock Text="Y" FontWeight="Bold" ></TextBlock>-->
+                    <Image Source="images/PCBsmall.png" Width="40" Height="30" Canvas.Top="65" Canvas.Left="55" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibilityConverter}, ElementName=rbQ2}" />
+                    <Image Source="images/PCBsmall.png" Width="40" Height="30" Canvas.Top="65" Canvas.Left="105" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibilityConverter}, ElementName=rbQ1}"/>
+                    <Image Source="images/PCBsmall.png" Width="40" Height="30" Canvas.Top="105" Canvas.Left="55" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibilityConverter}, ElementName=rbQ3}"/>
+                    <Image Source="images/PCBsmall.png" Width="40" Height="30" Canvas.Top="105" Canvas.Left="105" Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibilityConverter}, ElementName=rbQ4}"/>
+                </Canvas>
+            </Grid>
+
+        </Expander>
+
+        <!--<rangeSlider:RangeSliderOver Grid.Row="4" ></rangeSlider:RangeSliderOver>-->
+
+        <Expander Grid.Row="4" Header="{DynamicResource @CANDIDATE_FILTER}" Height="Auto" Width="Auto" Background="Transparent" >
+            <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Content="{DynamicResource @HEIGHT}" Grid.Row="0" Grid.Column="0" IsChecked="{Binding IsHeightFilter}" VerticalContentAlignment="Center"/>
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="4">
+                    <Image Source="images/ArrowX.png" Height="30" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBox Height="30" Width="60" VerticalAlignment="Center"
+                             Text="{Binding HeightRange.LowerBound}"></TextBox>
+                    <Image Source="images/CenterV.png" Height="30"/>
+                    <TextBox Height="30" Width="60" VerticalAlignment="Center"
+                             Text="{Binding HeightRange.UpperBound}"></TextBox>
+                    <Image Source="images/ArrowX.png" Height="30"></Image>
+
+                </StackPanel>
+                <CheckBox Content="{DynamicResource @AREA}"   Grid.Row="1" Grid.Column="0" IsChecked="{Binding IsAreaFilter}" VerticalContentAlignment="Center" />
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal"  Margin="4">
+                    <Image Source="images/ArrowX.png" Height="30" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBox Height="30" Width="60" VerticalAlignment="Center"
+                             Text="{Binding AreaRange.LowerBound}"></TextBox>
+                    <Image Source="images/CenterV.png" Height="30"/>
+                    <TextBox Height="30" Width="60" VerticalAlignment="Center"
+                             Text="{Binding AreaRange.UpperBound}"></TextBox>
+                    <Image Source="images/ArrowX.png" Height="30"></Image>
+
+                </StackPanel>
+                <CheckBox Content="{DynamicResource @VOLUME}" Grid.Row="2" Grid.Column="0" IsChecked="{Binding IsVolumeFilter}" VerticalContentAlignment="Center" />
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal"  Margin="4">
+                    <Image Source="images/ArrowX.png" Height="30" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                <SkewTransform AngleY="0" AngleX="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBox Height="30" Width="60" VerticalAlignment="Center"
+                             Text="{Binding VolumeRange.LowerBound}"></TextBox>
+                    <Image Source="images/CenterV.png" Height="30"/>
+                    <TextBox Height="30" Width="60" VerticalAlignment="Center"
+                             Text="{Binding VolumeRange.UpperBound}"></TextBox>
+                    <Image Source="images/ArrowX.png" Height="30" ></Image>
+
+                </StackPanel>
+            </Grid>
+
+        </Expander>
+    </Grid>
+</UserControl>

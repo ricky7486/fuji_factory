@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="PrinterCenter.UI.ucNetworkDrive"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PrinterCenter.UI"
+            
+             mc:Ignorable="d" 
+             >
+
+    <UserControl.DataContext>
+        <local:NetworkDriveViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.15*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <!--<Border Grid.Row="0" Grid.ColumnSpan="2" BorderBrush="#FFBDC9D1" BorderThickness="2,2,2,0" Height="19" CornerRadius="17,17,0,0" Width="Auto" />-->
+
+        <TextBlock  Grid.Row="1" Grid.ColumnSpan="2" Height="23" Text="{DynamicResource @CREATE_NETWORKDRIVE_MAPPING}" Margin="15,0,0,0" FontWeight="Bold" />
+        <!--<TextBlock  Grid.Row="1" Grid.Column="1" Height="23" x:Name="tbIndex" Text="" Margin="15,0,0,0" FontWeight="Bold" />-->
+        
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="20,5,0,5">
+            <TextBlock  Height="23"   Text="{DynamicResource @DRIVE}" />
+            <TextBlock Text=": " VerticalAlignment="Center"/>
+        </StackPanel>
+        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cbAvaiableDrives" Height="31" HorizontalAlignment="Left"   VerticalAlignment="Top" Width="200" Margin="0,5" 
+                  SelectedValue="{Binding NetDriveM.DriveInfo, Mode=TwoWay}" />
+
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="20,5,0,5">
+            <TextBlock Height="23"  Text="{DynamicResource @SHARED_FOLDER}" />
+            <TextBlock Text=": " VerticalAlignment="Center"/>
+            
+        </StackPanel>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="tbShareFolder" Height="28" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="200" 
+                 Text="{Binding NetDriveM.ShareFolder, Mode=TwoWay}" Margin="0,5"/>
+
+
+        <TextBlock Grid.Row="4" Grid.Column="1" Text=" ex: \\IP\Folder " VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Margin="20,5,0,5">
+            <TextBlock Height="23"  Text="{DynamicResource @USER_NAME}" />
+            <TextBlock Text=": " VerticalAlignment="Center"/>
+            
+        </StackPanel>
+        <TextBox Grid.Row="5" Grid.Column="1"  x:Name="tbUserName" Height="28" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="200" Margin="0,5" 
+                 Text="{Binding NetDriveM.UserName, Mode=TwoWay}"/>
+        <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal"  HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,5,0,5" >
+            <TextBlock Height="23"  Text="{DynamicResource @PASSWORD}" />
+            <TextBlock Text=": " VerticalAlignment="Center"/>
+        </StackPanel>
+        <TextBox Grid.Row="6" Grid.Column="1" x:Name="tbPassword" Height="28" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="200" Margin="0,5" 
+                 Text="{Binding NetDriveM.Password, Mode=TwoWay}"/>
+        <Button Grid.Row="7" Grid.Column="0" Height="40" Width="100" HorizontalAlignment="Left" Margin="5" Content="{DynamicResource @DIAGNOSIS}"
+                Command="{Binding Diagnosis}"/>
+        
+        <Button Grid.Row="7" Grid.Column="1" Height="40" Width="100" HorizontalAlignment="Right" Margin="5" Content="{DynamicResource @CREATE}"
+                Command="{Binding Create}"/>
+        
+        <!--<Border Grid.Row="8" Grid.ColumnSpan="2"  BorderBrush="#FFBDC9D1" BorderThickness="2,0,2,2" Height="19" CornerRadius="0,0,17,17" />-->
+
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:PrinterCenter.UI.Flow">
+
+
+    <!--<ListBox.ItemTemplate>-->
+        <!--<DataTemplate>-->
+        <DataTemplate x:Key="CheckListBoxDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Name="check" IsChecked="{Binding IsChecked, Mode=TwoWay}" Margin="3" VerticalAlignment="Center" />
+                <ContentPresenter Content="{Binding Value}" Margin="1"/>
+            </StackPanel>
+        </DataTemplate>
+    <!--</ListBox.ItemTemplate>-->
+
+
+</ResourceDictionary>
